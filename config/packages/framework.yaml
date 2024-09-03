@@ -8,7 +8,11 @@ framework:
 
     #esi: true
     #fragments: true
-
+    http_client:
+        scoped_clients:
+            # only requests matching scope will use these options
+            starcitizen.wiki.client:
+                base_uri: 'https://api.star-citizen.wiki'
 when@test:
     framework:
         test: true
