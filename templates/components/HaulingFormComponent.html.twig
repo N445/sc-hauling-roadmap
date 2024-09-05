@@ -1,0 +1,27 @@
+<div{{ attributes }}>
+    <div class="row">
+        <div class="col-md-6">
+            https://docs.star-citizen.wiki/
+{#            {{ form_start(form, {#}
+{#                attr: {#}
+{#                    'data-action': 'live#action:prevent',#}
+{#                    'data-live-action-param': 'save'#}
+{#                }#}
+{#            }) }}#}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary">
+                    Save
+                </button>
+{#                <button class="btn btn-secondary" type="button" data-action="live#$render">Apply</button>#}
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="col-md-6">
+            <pre class="mermaid">
+{{ this.getMermaidSchema().render() }}
+            </pre>
+        </div>
+    </div>
+</div>

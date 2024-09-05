@@ -6,7 +6,7 @@
                 "fetch": "eager",
                 "autoimport": {
                     "@arkounay/ux-collection/src/style.css": true,
-                    "@arkounay/ux-collection/src/style-when-not-using-bootstrap-5.css": true
+                    "@arkounay/ux-collection/src/style-when-not-using-bootstrap-5.css": false
                 }
             },
             "tabbed_collection": {
@@ -14,6 +14,15 @@
                 "fetch": "eager",
                 "autoimport": {
                     "@arkounay/ux-collection/src/tabbed-style.css": true
+                }
+            }
+        },
+        "@symfony/ux-live-component": {
+            "live": {
+                "enabled": true,
+                "fetch": "eager",
+                "autoimport": {
+                    "@symfony/ux-live-component/dist/live.min.css": true
                 }
             }
         }

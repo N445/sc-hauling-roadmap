@@ -2,10 +2,12 @@
 
 namespace App\Entity\Hauling;
 
+use App\Entity\User;
 use App\Repository\Hauling\HaulingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: HaulingRepository::class)]
 class Hauling
@@ -18,8 +20,14 @@ class Hauling
     /**
      * @var Collection<int, Route>
      */
-    #[ORM\OneToMany(targetEntity: Route::class, mappedBy: 'hauling', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Route::class, mappedBy: 'hauling', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $routes;
+
+    #[ORM\ManyToOne(inversedBy: 'haulings')]
+    private ?User $user = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $anonymous_user = null;
 
     public function __construct()
     {
@@ -57,6 +65,30 @@ class Hauling
                 $route->setHauling(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User|UserInterface|null $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAnonymousUser(): ?string
+    {
+        return $this->anonymous_user;
+    }
+
+    public function setAnonymousUser(?string $anonymous_user): static
+    {
+        $this->anonymous_user = $anonymous_user;
 
         return $this;
     }

@@ -27,12 +27,18 @@ class Route
     /**
      * @var Collection<int, Cargo>
      */
-    #[ORM\OneToMany(targetEntity: Cargo::class, mappedBy: 'route', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Cargo::class, mappedBy: 'route', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $cargos;
 
     #[ORM\ManyToOne(inversedBy: 'routes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Hauling $hauling = null;
+
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $fromSpecifiqueLocation = null;
+
+    #[ORM\Column(length: 255,nullable: true)]
+    private ?string $toSpecifiqueLocation = null;
 
     public function __construct()
     {
@@ -107,6 +113,28 @@ class Route
     {
         $this->hauling = $hauling;
 
+        return $this;
+    }
+
+    public function getFromSpecifiqueLocation(): ?string
+    {
+        return $this->fromSpecifiqueLocation;
+    }
+
+    public function setFromSpecifiqueLocation(?string $fromSpecifiqueLocation): Route
+    {
+        $this->fromSpecifiqueLocation = $fromSpecifiqueLocation;
+        return $this;
+    }
+
+    public function getToSpecifiqueLocation(): ?string
+    {
+        return $this->toSpecifiqueLocation;
+    }
+
+    public function setToSpecifiqueLocation(?string $toSpecifiqueLocation): Route
+    {
+        $this->toSpecifiqueLocation = $toSpecifiqueLocation;
         return $this;
     }
 }

@@ -30,6 +30,7 @@ class CargoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cargo::class,
+            'block_prefix' => 'custom_cargo',
         ]);
     }
 }
